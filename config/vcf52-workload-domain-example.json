@@ -1,0 +1,108 @@
+{
+    "domainName": "vcf-lab-w01",
+    "orgName": "vcf-lab-w01",
+    "deployWithoutLicenseKeys": true,
+    "vcenterSpec": {
+        "rootPassword": "VMware1!VMware1!",
+        "networkDetailsSpec": {
+            "dnsName": "wld-vc01.vcf.lab ",
+            "subnetMask": "255.255.0.0",
+            "ipAddress": "172.30.0.31",
+            "gateway": "172.30.0.1"
+        },
+        "name": "vcf-wld-vc01",
+        "datacenterName": "vcf-wld01-dc01"
+    },
+    "ssoDomainSpec": {
+        "ssoDomainName": "vsphere.local",
+        "ssoDomainPassword": "VMware1!VMware1!"
+    },
+    "computeSpec": {
+        "clusterSpecs": [
+            {
+                "clusterImageId": "XXX",
+                "name": "vcf-w01-cl01",
+                "hostSpecs": [
+                    {
+                        "id": "XXX",
+                        "hostNetworkSpec": {
+                            "vmNics": [
+                                {
+                                    "vdsName": "vcf-wld-cl01-vds01",
+                                    "id": "vmnic0"
+                                },
+                                {
+                                    "vdsName": "vcf-wld-cl01-vds01",
+                                    "id": "vmnic1"
+                                }
+                            ]
+                        }
+                    }
+                ],
+                "datastoreSpec": {
+                    "vsanDatastoreSpec": {
+                        "failuresToTolerate": "0",
+                        "datastoreName": "vcf-wld-cl01-vsan01"
+                    }
+                },
+                "networkSpec": {
+                    "vdsSpecs": [
+                        {
+                            "name": "vcf-wld-cl01-vds01",
+                            "portGroupSpecs": [
+                                {
+                                    "transportType": "MANAGEMENT",
+                                    "name": "vcf-wld-cl01-vds01-management"
+                                },
+                                {
+                                    "transportType": "VMOTION",
+                                    "name": "vcf-wld-cl01-vds01-vmotion"
+                                },
+                                {
+                                    "transportType": "VSAN",
+                                    "name": "vcf-wld-cl01-vds01-vsan"
+                                }
+                            ]
+                        }
+                    ],
+                    "nsxClusterSpec": {
+                        "nsxTClusterSpec": {
+                            "geneveVlanId": 60,
+                            "ipAddressPoolSpec": {
+                                "subnets": [
+                                    {
+                                        "cidr": "172.60.0.0/24",
+                                        "gateway": "172.60.0.1",
+                                        "ipAddressPoolRanges": [
+                                            {
+                                                "start": "172.60.0.155",
+                                                "end": "172.60.0.160"
+                                            }
+                                        ]
+                                    }
+                                ],
+                                "name": "wld-pool"
+                            }
+                        }
+                    }
+                }
+            }
+        ]
+    },
+    "nsxTSpec": {
+        "nsxManagerSpecs": [
+            {
+                "name": "vcf-wld-nsx01a",
+                "networkDetailsSpec": {
+                    "dnsName": "wld-nsx01a.vcf.lab",
+                    "subnetMask": "255.255.0.0",
+                    "ipAddress": "172.30.0.33",
+                    "gateway": "172.30.0.1"
+                }
+            }
+        ],
+        "formFactor": "medium",
+        "vipFqdn": "wld-nsx01.vcf.lab",
+        "nsxManagerAdminPassword": "VMware1!VMware1!"
+    }
+}

@@ -1,0 +1,190 @@
+{
+	"taskName": "workflowconfig/workflowspec-ems.json",
+	"sddcId": "vcf-lab-m01",
+	"ceipEnabled": "True",
+	"fipsEnabled": "False",
+	"managementPoolName": "vcf-m01-np01",
+	"skipEsxThumbprintValidation": true,
+	"deployWithoutLicenseKeys": true,
+    "subscriptionLicensing": "False",
+	"excludedComponents": [
+		"NSX-V", "LogInsight", "AVN"
+	],
+	"ntpServers": [
+		"104.167.215.195"
+	],
+	"dnsSpec": {
+		"domain": "vcf.lab",
+		"subdomain": "vcf.lab",
+		"nameserver": "172.30.0.2"
+	},
+	"sddcManagerSpec": {
+		"hostname": "mgmt-sddcm01.vcf.lab",
+		"ipAddress": "172.30.0.12",
+		"netmask": "255.255.255.0",
+		"localUserPassword": "VMware1!VMware1!",
+		"rootUserCredentials": {
+			"username": "root",
+			"password": "VMware1!VMware1!"
+		},
+		"restApiCredentials": {
+			"username": "admin",
+			"password": "VMware1!VMware1!"
+		},
+		"secondUserCredentials": {
+			"username": "vcf",
+			"password": "VMware1!VMware1!"
+		}
+	},
+	"networkSpecs": [{
+			"networkType": "MANAGEMENT",
+			"subnet": "172.30.0.0/24",
+			"vlanId": "0",
+			"mtu": "1500",
+			"gateway": "172.30.0.1",
+			"portGroupKey": "vcf-m01-cl01-vds01-mgmt"
+		},
+		{
+			"networkType": "VMOTION",
+			"subnet": "172.40.0.0/24",
+			"includeIpAddressRanges": [{
+				"startIpAddress": "172.40.0.13",
+				"endIpAddress": "172.40.0.20"
+			}],
+			"vlanId": "40",
+			"mtu": "8900",
+			"gateway": "172.40.0.1",
+			"portGroupKey": "vcf-m01-cl01-vds01-vmotion"
+		},
+		{
+			"networkType": "VSAN",
+			"subnet": "172.50.0.0/24",
+			"includeIpAddressRanges": [{
+				"startIpAddress": "172.50.0.13",
+				"endIpAddress": "172.50.0.20"
+			}],
+			"vlanId": "50",
+			"mtu": "8900",
+			"gateway": "172.50.0.1",
+			"portGroupKey": "vcf-m01-cl01-vds01-vsan"
+		}
+	],
+	"nsxtSpec": {
+		"nsxtManagerSize": "medium",
+		"nsxtManagers": [{
+			"hostname": "mgmt-nsx01a.vcf.lab",
+			"ip": "172.30.0.15"
+		}],
+		"rootNsxtManagerPassword": "VMware1!VMware1!",
+		"nsxtAdminPassword": "VMware1!VMware1!",
+		"nsxtAuditPassword": "VMware1!VMware1!",
+		"rootLoginEnabledForNsxtManager": "true",
+		"sshEnabledForNsxtManager": "true",
+		"overLayTransportZone": {
+			"zoneName": "vcf-m01-tz-overlay01",
+			"networkName": "netName-overlay"
+		},
+		"vlanTransportZone": {
+			"zoneName": "vcf-m01-tz-vlan01",
+			"networkName": "netName-vlan"
+		},
+		"vip": "172.30.0.14",
+		"vipFqdn": "mgmt-nsx01.vcf.lab",
+		"transportVlanId": 60
+	},
+	"vsanSpec": {
+		"vsanName": "vsan-1",
+		"vsanDedup": false,
+		"esaConfig" : {
+            "enabled" : true
+        },
+		"datastoreName": "vcf-m01-cl01-ds-vsan01"
+	},
+	"dvsSpecs": [{
+		"mtu": "8900",
+		"niocSpecs": [{
+				"trafficType": "VSAN",
+				"value": "HIGH"
+			},
+			{
+				"trafficType": "VMOTION",
+				"value": "LOW"
+			},
+			{
+				"trafficType": "VDP",
+				"value": "LOW"
+			},
+			{
+				"trafficType": "VIRTUALMACHINE",
+				"value": "HIGH"
+			},
+			{
+				"trafficType": "MANAGEMENT",
+				"value": "NORMAL"
+			},
+			{
+				"trafficType": "NFS",
+				"value": "LOW"
+			},
+			{
+				"trafficType": "HBR",
+				"value": "LOW"
+			},
+			{
+				"trafficType": "FAULTTOLERANCE",
+				"value": "LOW"
+			},
+			{
+				"trafficType": "ISCSI",
+				"value": "LOW"
+			}
+		],
+		"dvsName": "vcf-m01-cl01-vds01",
+		"vmnics": [
+			"vmnic0",
+			"vmnic1"
+		],
+		"networks": [
+			"MANAGEMENT",
+			"VMOTION",
+			"VSAN"
+		]
+	}],
+	"clusterSpec": {
+		"vmFolders": {
+			"MANAGEMENT": "vcf-m01-fd-mgmt",
+			"NETWORKING": "vcf-m01-fd-nsx",
+			"EDGENODES": "vcf-m01-fd-edge"
+		},
+		"clusterName": "vcf-m01-cl01",
+		"hostFailuresToTolerate": 0,
+		"clusterEvcMode": "",
+		"clusterImageEnabled": true
+	},
+	"pscSpecs": [{
+		"pscSsoSpec": {
+			"ssoDomain": "vsphere.local"
+		},
+		"adminUserSsoPassword": "VMware1!VMware1!"
+	}],
+	"vcenterSpec": {
+		"vcenterIp": "172.30.0.11",
+		"vcenterHostname": "mgmt-vc01.vcf.lab",
+		"rootVcenterPassword": "VMware1!VMware1!",
+		"vmSize": "small"
+	},
+	"hostSpecs": [{
+		"hostname": "mgmt-esx01.vcf.lab",
+		"vSwitch": "vSwitch0",
+		"association": "vcf-m01-dc01",
+		"credentials": {
+			"username": "root",
+			"password": "VMware1!"
+		},
+		"ipAddressPrivate": {
+			"subnet": "255.255.255.0",
+			"ipAddress": "172.30.0.10",
+			"gateway": "172.30.0.1"
+		}
+	}]
+}

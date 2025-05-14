@@ -1,0 +1,62 @@
+{
+    "edgeClusterName": "vcf-w01-edge",
+    "edgeClusterType": "NSX-T",
+    "edgeRootPassword": "VMware1!VMware1!",
+    "edgeAdminPassword": "VMware1!VMware1!",
+    "edgeAuditPassword": "VMware1!VMware1!",
+    "edgeFormFactor": "SMALL",
+    "tier0ServicesHighAvailability": "ACTIVE_STANDBY",
+    "mtu": 9000,
+    "tier0RoutingType": "STATIC",
+    "edgeNodeSpecs": [
+        {
+            "edgeNodeName": "wld-edge01a.vcf.lab",
+            "managementIP": "172.30.0.34/24",
+            "managementGateway": "172.30.0.1",
+            "vmManagementPortgroupVlan": 0,
+            "vmManagementPortgroupName": "vmugc-wld-cl01-vds01-",
+            "edgeTep1IP": "172.70.0.160/24",
+            "edgeTep2IP": "172.70.0.161/24",
+            "edgeTepGateway": "172.70.0.1",
+            "edgeTepVlan": 70,
+            "clusterId": "XXX",
+            "interRackCluster": false,
+            "uplinkNetwork": [
+                {
+                    "uplinkVlan": 80,
+                    "uplinkInterfaceIP": "172.80.0.16/24"
+                },
+                {
+                    "uplinkVlan": 80,
+                    "uplinkInterfaceIP": "172.90.0.16/24"
+                }
+            ]
+        },
+        {
+            "edgeNodeName": "wld-edge01b.vcf.lab",
+            "managementIP": "172.30.0.35/24",
+            "managementGateway": "172.30.0.1",
+            "vmManagementPortgroupVlan": 0,
+            "vmManagementPortgroupName": "vcf-wld-cl01-vds01-",
+            "edgeTep1IP": "172.70.0.170/24",
+            "edgeTep2IP": "172.70.0.171/24",
+            "edgeTepGateway": "172.70.0.1",
+            "edgeTepVlan": 70,
+            "clusterId": "XXX",
+            "interRackCluster": false,
+            "uplinkNetwork": [
+                {
+                    "uplinkVlan": 80,
+                    "uplinkInterfaceIP": "172.80.0.17/24"
+                },
+                {
+                    "uplinkVlan": 90,
+                    "uplinkInterfaceIP": "172.90.0.17/24"
+                }
+            ]
+        }
+    ],
+    "tier0Name": "t0",
+    "tier1Name": "t1",
+    "edgeClusterProfileType": "DEFAULT"
+}
