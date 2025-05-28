@@ -20,14 +20,16 @@ Deploy a fully functional VMware Cloud Foundation (VCF) 5.x environment running 
 
 ## Changelog
 
+* **05/28/2025**
+  * Fix ESXi BOM version (U3b) + Added Build numbers
 * **05/15/2025**
   * Initial Release
 
 
 ## Build of Materials (BOM)
 
- * [VMware Cloud Foundation (VCF) 5.2.1](https://support.broadcom.com/group/ecx/productfiles?subFamily=VMware%20Cloud%20Foundation&displayGroup=VMware%20Cloud%20Foundation%205.2&release=5.2.1&os=&servicePk=&language=EN)
-    * [ESXi 8.0 Update 3](https://support.broadcom.com/group/ecx/productfiles?displayGroup=VMware%20vSphere%20-%20Enterprise%20Plus&release=8.0&os=&servicePk=202628&language=EN&groupId=204419&viewGroup=true)
+ * [VMware Cloud Foundation (VCF) 5.2.1](https://support.broadcom.com/group/ecx/productfiles?subFamily=VMware%20Cloud%20Foundation&displayGroup=VMware%20Cloud%20Foundation%205.2&release=5.2.1&os=&servicePk=&language=EN) (Build 24307856)
+    * [ESXi 8.0 Update 3b](https://support.broadcom.com/web/ecx/solutiondetails?patchId=5514) (Build 24280767)
  * [1 x GMKTec NucBox K11](https://williamlam.com/2025/03/esxi-on-gmktec-nucbox-k11.html)
     * 1 x USB Device (16GB or larger)
     * [1 x 2 x 64GB DDR5 SODIMM (128GB)](https://amzn.to/4bcpXFJ)
