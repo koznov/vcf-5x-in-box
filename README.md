@@ -1,6 +1,6 @@
-# VMware Cloud Foundation (VCF) 5.x in a Box
+# VMware Cloud Foundation (VCF) in a small rack box
 
-Deploy a fully functional VMware Cloud Foundation (VCF) 5.x environment running on a single physical ESXi host for development and lab purposes, with the goal of being able to explore and learn about VCF using a minimal amount of compute and storage resources.
+Deploy a fully functional VMware Cloud Foundation (VCF) environment running on a three compact ESXi host for development and lab purposes, with the goal of being able to explore and learn about VCF using a minimal amount of compute and storage resources.
 
 **Note:** This is not using Nested ESXi such as the [VCF Holodeck Solution](https://williamlam.com/2023/03/self-contained-automated-vmware-cloud-foundation-vcf-deployment-using-new-vlc-holodeck-toolkit.html)
 
@@ -19,7 +19,8 @@ Deploy a fully functional VMware Cloud Foundation (VCF) 5.x environment running 
 * [Blog References](#blog-references)
 
 ## Changelog
-
+* **07/16/2025**
+  * Adjusting BOM and networks for my requirments
 * **05/28/2025**
   * Fix ESXi BOM version (U3b) + Added Build numbers
 * **05/15/2025**
@@ -30,42 +31,64 @@ Deploy a fully functional VMware Cloud Foundation (VCF) 5.x environment running 
 
  * [VMware Cloud Foundation (VCF) 5.2.1](https://support.broadcom.com/group/ecx/productfiles?subFamily=VMware%20Cloud%20Foundation&displayGroup=VMware%20Cloud%20Foundation%205.2&release=5.2.1&os=&servicePk=&language=EN) (Build 24307856)
     * [ESXi 8.0 Update 3b](https://support.broadcom.com/web/ecx/solutiondetails?patchId=5514) (Build 24280767)
- * [1 x GMKTec NucBox K11](https://williamlam.com/2025/03/esxi-on-gmktec-nucbox-k11.html)
-    * 1 x USB Device (16GB or larger)
-    * [1 x 2 x 64GB DDR5 SODIMM (128GB)](https://amzn.to/4bcpXFJ)
-    * [2 x Samsung 990 EVO 2TB M.2 2280 PCIe Gen 4](https://amzn.to/4lQC403)
+ * [3 x Minisforum MS-A2](https://amzn.to/44GKhw0)
+    * 1 x Orico 2230 NVMe SSD (128Gb) as boot device - replacement of Wireless NIC (https://amzn.to/46eVO8m)
+    * [1 x 2 x 64GB DDR5 SODIMM (128GB)](https://amzn.to/44GKhw0)
+    * [1 x MSI SPATIUM M470 PRO SSD 1TB PCIe Gen 4](https://amzn.to/3TE7avc)
+    * [1 x Kingston 15.36TB DC3000ME U.2 PCIe 5.0 NVMe](https://amzn.to/3GFB3Zc)
 
-## Prereq
+
+## Network scheme
 
 * Minimum 4 VLANs (e.g. 30, 40, 50, 60) for VCF Management Domain
-    * VLAN30 - Management
-    * VLAN40 - vMotion
-    * VLAN50 - vSAN
-    * VLAN60 - NSX Host TEP
+    * VLAN30 - Management (VCF-VI-MANAGEMENT-VLAN)
+    * VLAN40 - vMotion (VCF-VI-VMOTION-VLAN)
+    * VLAN50 - vSAN (VCF-VI-VSAN-VLAN)
+    * VLAN60 - NSX Host TEP (VCF-VI-NSX-HOST-TEP-VLAN)
 * (Optional) Additional 3 VLANs (e.g. 70, 80 & 90) for VCF Edge Cluster for Workload Domain
-    * VLAN70 - NSX Edge TEP
-    * VLAN80 - Tier 0
-    * VLAN90 - Tier 1
+    * VLAN70 - NSX Edge TEP (VCF-VI-NSX-EDGE-TEP-VLAN)
+    * VLAN80 - Tier 0 (VCF-VI-EDGE-T0-VLAN)
+    * VLAN90 - Tier 1 (VCF-VI-EDGE-T1-VLAN)
 * At least 6 IP Addresses/DNS for VCF Management Domain. Additional IP Address/DNS will be required for VCF Workload Domain along with deploying full Aria Suite
 
-| Hostname     | FQDN                 | IP Address  | Function                              |
-|--------------|----------------------|-------------|---------------------------------------|
-| dns          | dns.vcf.lab          | 172.30.0.2  | DNS Server                            |
-| cb           | cb.vcf.lab           | 172.30.0.4  | VCF Cloud Builder                     |
-| mgmt-esx01   | mgmt-esx01.vcf.lab   | 172.30.0.10 | Physical ESXi Server                  |
-| mgmt-vc01    | mgmt-vc01.vcf.lab    | 172.30.0.11 | vCenter Server for Management Domain  |
-| mgmt-sddcm01 | mgmt-sddcm01.vcf.lab | 172.30.0.12 | SDDC Manager                          |
-| mgmt-nsx01   | mgmt-nsx01.vcf.lab   | 172.30.0.13 | NSX Manager VIP for Management Domain |
-| mgmt-nsx01a  | mgmt-nsx01a.vcf.lab  | 172.30.0.14 | NSX Manager for Management Domain     |
-| mgmt-lcm01   | mgmt-lcm01.vcf.lab   | 172.30.0.18 | Aria Suite Lifecycle Manager          |
-| mgmt-idm01   | mgmt-idm01.vcf.lab   | 172.30.0.19 | Aria Identity Manager                 |
-| mgmt-ops01   | mgmt-ops01.vcf.lab   | 172.30.0.20 | Aria Operations                       |
-| mgmt-logs01  | mgmt-logs01.vcf.lab  | 172.30.0.21 | Aria Operations for Logs              |
-| mgmt-auto01  | mgmt-auto01.vcf.lab  | 172.30.0.22 | Aria Automation                       |
-| wld-esx01    | wld-esx01.vcf.lab    | 172.30.0.30 | Nested ESXi for Workload Domain       |
-| wld-vc01     | wld-vc01.vcf.lab     | 172.30.0.31 | vCenter Server for Workload Domain    |
-| wld-nsx01    | wld-nsx01.vcf.lab    | 172.30.0.32 | NSX Manager VIP for Workload Domain   |
-| wld-nsx01a   | wld-nsx01a.vcf.lab   | 172.30.0.33 | NSX Manager for Workload Domain       |
+| Network name             | VLAN ID              | Gateway address | Function                              |
+|--------------------------|----------------------|-----------------|---------------------------------------|
+| HW-MGMT-VLAN             | 20                   | 172.20.0.1/24   | Hardware Management                   |
+| VCF-VI-MANAGEMENT-VLAN   | 30                   | 172.30.0.1/24   | VCF Software Management               |
+| VCF-VI-NFC-VLAN          | 35                   | 172.35.0.1/24   | VCF NFC Replication traffic           |
+| VCF-VI-VMOTION-VLAN      | 40                   | 172.40.0.0/24   | VCF vMotion Network                   |
+| VCF-VI-VSAN-VLAN         | 50                   | 172.50.0.0/24   | VCF vSAN Network                      |
+| VCF-VI-NSX-HOST-TEP-VLAN | 60                   | 172.60.0.1/24   | NSX Host TEP                          |
+| VCF-VI-NSX-EDGE-TEP-VLAN | 70                   | 172.70.0.1/24   | NSX Edge TEP                          |
+| VCF-VI-EDGE-T0-VLAN      | 80                   | 172.80.0.1/24   | Tier 0                                |
+| VCF-VI-EDGE-T1-VLAN      | 90                   | 172.90.0.1/24   | Tier 1                                |
+| VCF-VI-VM-VLAN           | 100                  | 172.100.0.1/24  | VM Network VLAN                       |
+| VCF-VI-NFS-VLAN          | 110                  | 172.110.0.1/24  | NFS network                           |
+
+
+
+| Hostname     | FQDN                 | IP Address  | Function                                  |
+|--------------|----------------------|-------------|-------------------------------------------|
+| dc01         | dc01.vcf.lab         | 172.30.0.50  | Domain controller & DNS Server           |
+| cb           | cb.vcf.lab           | 172.30.0.4   | VCF Cloud Builder                        |
+| mgmt-esx98   | mgmt-esx98.vcf.lab   | 172.30.0.98  | Physical ESXi-98 Server                  |
+| mgmt-esx99   | mgmt-esx99.vcf.lab   | 172.30.0.99  | Physical ESXi-99 Server                  |
+| mgmt-esx01   | mgmt-esx01.vcf.lab   | 172.30.0.101 | Physical ESXi-01 Server                  |
+| mgmt-esx02   | mgmt-esx02.vcf.lab   | 172.30.0.102 | Physical ESXi-02 Server                  |
+| mgmt-esx03   | mgmt-esx03.vcf.lab   | 172.30.0.103 | Physical ESXi-03 Server                  |
+| mgmt-vc01    | mgmt-vc01.vcf.lab    | 172.30.0.100 | vCenter Server for Management Domain     |
+| mgmt-sddcm01 | mgmt-sddcm01.vcf.lab | 172.30.0.12 | SDDC Manager                              |
+| mgmt-nsx01   | mgmt-nsx01.vcf.lab   | 172.30.0.13 | NSX Manager VIP for Management Domain     |
+| mgmt-nsx01a  | mgmt-nsx01a.vcf.lab  | 172.30.0.14 | NSX Manager for Management Domain         |
+| mgmt-lcm01   | mgmt-lcm01.vcf.lab   | 172.30.0.18 | Aria Suite Lifecycle Manager              |
+| mgmt-idm01   | mgmt-idm01.vcf.lab   | 172.30.0.19 | Aria Identity Manager                     |
+| mgmt-ops01   | mgmt-ops01.vcf.lab   | 172.30.0.20 | Aria Operations                           |
+| mgmt-logs01  | mgmt-logs01.vcf.lab  | 172.30.0.21 | Aria Operations for Logs                  |
+| mgmt-auto01  | mgmt-auto01.vcf.lab  | 172.30.0.22 | Aria Automation                           |
+| wld-esx01    | wld-esx01.vcf.lab    | 172.30.0.30 | Nested ESXi for Workload Domain           |
+| wld-vc01     | wld-vc01.vcf.lab     | 172.30.0.31 | vCenter Server for Workload Domain        |
+| wld-nsx01    | wld-nsx01.vcf.lab    | 172.30.0.32 | NSX Manager VIP for Workload Domain       |
+| wld-nsx01a   | wld-nsx01a.vcf.lab   | 172.30.0.33 | NSX Manager for Workload Domain           |
 
 ## Installation
 
