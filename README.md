@@ -72,6 +72,7 @@ Deploy a fully functional VMware Cloud Foundation (VCF) environment running on a
 |--------------|----------------------|--------------|-------------------------------------------|
 | dc01         | dc01.vcf.lab         | 172.30.0.50  | Domain controller & DNS Server            |
 | cb           | cb.vcf.lab           | 172.30.0.4   | VCF Cloud Builder                         |
+| ntp01        | ntp01.vcf.lab        | 172.30.0.2   | NTP server                                |
 | mgmt-esx98   | mgmt-esx98.vcf.lab   | 172.30.0.98  | Physical ESXi-98 Server                   |
 | mgmt-esx99   | mgmt-esx99.vcf.lab   | 172.30.0.99  | Physical ESXi-99 Server                   |
 | mgmt-esx01   | mgmt-esx01.vcf.lab   | 172.30.0.101 | Physical ESXi-01 Server                   |
