@@ -32,7 +32,7 @@ Deploy a fully functional VMware Cloud Foundation (VCF) environment running on a
  * [VMware Cloud Foundation (VCF) 5.2.1](https://support.broadcom.com/group/ecx/productfiles?subFamily=VMware%20Cloud%20Foundation&displayGroup=VMware%20Cloud%20Foundation%205.2&release=5.2.1&os=&servicePk=&language=EN) (Build 24307856)
     * [ESXi 8.0 Update 3b](https://support.broadcom.com/web/ecx/solutiondetails?patchId=5514) (Build 24280767)
  * [3 x Minisforum MS-A2](https://amzn.to/44GKhw0)
-    * 1 x Orico 2230 NVMe SSD (128Gb) as boot device - replacement of Wireless NIC (https://amzn.to/46eVO8m)
+    * [1 x Orico 2230 NVMe SSD (128Gb) as boot device - replacement of Wireless NIC](https://amzn.to/46eVO8m)
     * [1 x 2 x 64GB DDR5 SODIMM (128GB)](https://amzn.to/44GKhw0)
     * [1 x MSI SPATIUM M470 PRO SSD 1TB PCIe Gen 4](https://amzn.to/3TE7avc)
     * [1 x Kingston 15.36TB DC3000ME U.2 PCIe 5.0 NVMe](https://amzn.to/3GFB3Zc)
