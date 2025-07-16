@@ -64,31 +64,38 @@ Deploy a fully functional VMware Cloud Foundation (VCF) environment running on a
 | VCF-VI-EDGE-T1-VLAN      | 90                   | 172.90.0.1/24   | Tier 1                                |
 | VCF-VI-VM-VLAN           | 100                  | 172.100.0.1/24  | VM Network VLAN                       |
 | VCF-VI-NFS-VLAN          | 110                  | 172.110.0.1/24  | NFS network                           |
+| L2TP-IPsec-NET           | -                    | 172.99.0.100/24 | L2TP IPsec RA                         |
 
 
 
-| Hostname     | FQDN                 | IP Address  | Function                                  |
-|--------------|----------------------|-------------|-------------------------------------------|
-| dc01         | dc01.vcf.lab         | 172.30.0.50  | Domain controller & DNS Server           |
-| cb           | cb.vcf.lab           | 172.30.0.4   | VCF Cloud Builder                        |
-| mgmt-esx98   | mgmt-esx98.vcf.lab   | 172.30.0.98  | Physical ESXi-98 Server                  |
-| mgmt-esx99   | mgmt-esx99.vcf.lab   | 172.30.0.99  | Physical ESXi-99 Server                  |
-| mgmt-esx01   | mgmt-esx01.vcf.lab   | 172.30.0.101 | Physical ESXi-01 Server                  |
-| mgmt-esx02   | mgmt-esx02.vcf.lab   | 172.30.0.102 | Physical ESXi-02 Server                  |
-| mgmt-esx03   | mgmt-esx03.vcf.lab   | 172.30.0.103 | Physical ESXi-03 Server                  |
-| mgmt-vc01    | mgmt-vc01.vcf.lab    | 172.30.0.100 | vCenter Server for Management Domain     |
-| mgmt-sddcm01 | mgmt-sddcm01.vcf.lab | 172.30.0.12 | SDDC Manager                              |
-| mgmt-nsx01   | mgmt-nsx01.vcf.lab   | 172.30.0.13 | NSX Manager VIP for Management Domain     |
-| mgmt-nsx01a  | mgmt-nsx01a.vcf.lab  | 172.30.0.14 | NSX Manager for Management Domain         |
-| mgmt-lcm01   | mgmt-lcm01.vcf.lab   | 172.30.0.18 | Aria Suite Lifecycle Manager              |
-| mgmt-idm01   | mgmt-idm01.vcf.lab   | 172.30.0.19 | Aria Identity Manager                     |
-| mgmt-ops01   | mgmt-ops01.vcf.lab   | 172.30.0.20 | Aria Operations                           |
-| mgmt-logs01  | mgmt-logs01.vcf.lab  | 172.30.0.21 | Aria Operations for Logs                  |
-| mgmt-auto01  | mgmt-auto01.vcf.lab  | 172.30.0.22 | Aria Automation                           |
-| wld-esx01    | wld-esx01.vcf.lab    | 172.30.0.30 | Nested ESXi for Workload Domain           |
-| wld-vc01     | wld-vc01.vcf.lab     | 172.30.0.31 | vCenter Server for Workload Domain        |
-| wld-nsx01    | wld-nsx01.vcf.lab    | 172.30.0.32 | NSX Manager VIP for Workload Domain       |
-| wld-nsx01a   | wld-nsx01a.vcf.lab   | 172.30.0.33 | NSX Manager for Workload Domain           |
+| Hostname     | FQDN                 | IP Address   | Function                                  |
+|--------------|----------------------|--------------|-------------------------------------------|
+| dc01         | dc01.vcf.lab         | 172.30.0.50  | Domain controller & DNS Server            |
+| cb           | cb.vcf.lab           | 172.30.0.4   | VCF Cloud Builder                         |
+| mgmt-esx98   | mgmt-esx98.vcf.lab   | 172.30.0.98  | Physical ESXi-98 Server                   |
+| mgmt-esx99   | mgmt-esx99.vcf.lab   | 172.30.0.99  | Physical ESXi-99 Server                   |
+| mgmt-esx01   | mgmt-esx01.vcf.lab   | 172.30.0.101 | Physical ESXi-01 Server                   |
+| mgmt-esx02   | mgmt-esx02.vcf.lab   | 172.30.0.102 | Physical ESXi-02 Server                   |
+| mgmt-esx03   | mgmt-esx03.vcf.lab   | 172.30.0.103 | Physical ESXi-03 Server                   |
+| mgmt-vc01    | mgmt-vc01.vcf.lab    | 172.30.0.100 | vCenter Server for Management Domain      |
+| mgmt-sddcm01 | mgmt-sddcm01.vcf.lab | 172.30.0.12  | SDDC Manager                              |
+| mgmt-nsx01   | mgmt-nsx01.vcf.lab   | 172.30.0.13  | NSX Manager VIP for Management Domain     |
+| mgmt-nsx01a  | mgmt-nsx01a.vcf.lab  | 172.30.0.14  | NSX Manager for Management Domain         |
+| mgmt-lcm01   | mgmt-lcm01.vcf.lab   | 172.30.0.18  | Aria Suite Lifecycle Manager              |
+| mgmt-idm01   | mgmt-idm01.vcf.lab   | 172.30.0.19  | Aria Identity Manager                     |
+| mgmt-ops01   | mgmt-ops01.vcf.lab   | 172.30.0.20  | Aria Operations                           |
+| mgmt-logs01  | mgmt-logs01.vcf.lab  | 172.30.0.21  | Aria Operations for Logs                  |
+| mgmt-auto01  | mgmt-auto01.vcf.lab  | 172.30.0.22  | Aria Automation                           |
+| wld-esx01    | wld-esx01.vcf.lab    | 172.30.0.30  | Nested ESXi for Workload Domain           |
+| wld-vc01     | wld-vc01.vcf.lab     | 172.30.0.31  | vCenter Server for Workload Domain        |
+| wld-nsx01    | wld-nsx01.vcf.lab    | 172.30.0.32  | NSX Manager VIP for Workload Domain       |
+| wld-nsx01a   | wld-nsx01a.vcf.lab   | 172.30.0.33  | NSX Manager for Workload Domain           |
+| jkvm-esx01   | jkvm-esx01.vcf.lab   | 172.20.0.11  | JetKVM connected to mgmt-esx01 MS-02      |
+| jkvm-esx02   | jkvm-esx02.vcf.lab   | 172.20.0.12  | JetKVM connected to mgmt-esx01 MS-02      |
+| jkvm-esx03   | jkvm-esx03.vcf.lab   | 172.20.0.13  | JetKVM connected to mgmt-esx01 MS-02      |
+| jkvm-nas     | jkvm-nas.vcf.lab     | 172.20.0.14  | JetKVM connected to NAS                   |
+| r01          | r01.vcf.lab          | 172.20.0.1   | Fortigate 60E Management                  |
+| sw01         | sw01.vcf.lab         | 172.20.0.254 | Fortigate 60E Management                  |
 
 ## Installation
 
