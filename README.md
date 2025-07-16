@@ -91,6 +91,7 @@ Deploy a fully functional VMware Cloud Foundation (VCF) environment running on a
 | wld-vc01     | wld-vc01.vcf.lab     | 172.30.0.31  | vCenter Server for Workload Domain        |
 | wld-nsx01    | wld-nsx01.vcf.lab    | 172.30.0.32  | NSX Manager VIP for Workload Domain       |
 | wld-nsx01a   | wld-nsx01a.vcf.lab   | 172.30.0.33  | NSX Manager for Workload Domain           |
+| nas          | nas.vcf.lab          | 172.30.0.150 | Synology NAS (NFS + Backup)               |
 | jkvm-esx01   | jkvm-esx01.vcf.lab   | 172.20.0.11  | JetKVM connected to mgmt-esx01 MS-02      |
 | jkvm-esx02   | jkvm-esx02.vcf.lab   | 172.20.0.12  | JetKVM connected to mgmt-esx01 MS-02      |
 | jkvm-esx03   | jkvm-esx03.vcf.lab   | 172.20.0.13  | JetKVM connected to mgmt-esx01 MS-02      |
